@@ -1,0 +1,17 @@
+{
+"coworker": {
+    "_id": "object_id",
+    "first_name": "string",
+    "last_name": "string",
+    "department": "string",
+    "potential": "integer"
+    },
+"connection": {
+    "_id": "object_id",
+    "first_name_1": "string",
+    "last_name_1": "string",
+    "first_name_2": "string",
+    "last_name_2": "string",
+    "status": "string"
+}
+}
