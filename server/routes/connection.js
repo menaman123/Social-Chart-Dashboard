@@ -38,7 +38,42 @@ router.get('connections', async (req, res) => {
     */ 
     Connection.find()
     .then(data=> {
-
-
+        data = data.map( connection => {
+            var edge = [connection.first_name_1, connection.last_name_1, connection.first_name_2, connection.last_name_2]
+        return edge
     })
+    console.log(data)
+    res.json(data);
+    })
+    .catch(error => res.json(error))
 });
+
+router.post('/connection', async (req, res) => {
+    //The body param will contain the connection between the two coworkers, that is where it will be
+    // Checks if already existing connection exists
+
+    let connection_first_name_1 = req.body.first_name_1;
+    let connection_last_name_1 = req.body.last_name_1;
+    let connection_first_name_2 = req.body.first_name_2;
+    let connection_last_name_2 = req.body.last_name_2;
+    const status = "done";
+
+
+    let existingConnection = await Connection.findOne({$or: [
+                                                            {$and: [{"first_name_1": connection_first_name_1}, {"last_name_1": connection_last_name_1}]},
+                                                            {$and: [{"first_name_1": connection_first_name_2}, {"last_name_1": connection_last_name_2}]}
+                                                        ] });
+
+    if(!existingConnection){
+        Connection.create(
+            connection_first_name_1,
+            connection_last_name_1,
+            connection_first_name_2,
+            connection_last_name_2,
+            status
+        );
+        res.send("Connection created");
+    }
+})
+
+//Need to add a delete
