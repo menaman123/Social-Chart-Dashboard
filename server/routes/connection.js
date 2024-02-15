@@ -58,7 +58,7 @@ router.post('/connection', async (req, res) => {
     let connection_last_name_2 = req.body.last_name_2;
     const status = "done";
 
-
+    // Need to fix this First Name can be the same for multiple connections as long as that combo of first_name_1 and first_name_2 cant exist
     let existingConnection = await Connection.findOne({$or: [
                                                             {$and: [{"first_name_1": connection_first_name_1}, {"last_name_1": connection_last_name_1}]},
                                                             {$and: [{"first_name_1": connection_first_name_2}, {"last_name_1": connection_last_name_2}]}
