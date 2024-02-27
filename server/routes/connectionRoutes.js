@@ -1,4 +1,5 @@
 const express = require('express'), router = express.Router();
+const mongoose = require('mongoose')
 const Connection = require('../models/connection');
 const Coworker = require('../models/coworker');
 
@@ -48,9 +49,11 @@ router.get('connections', async (req, res) => {
     .catch(error => res.json(error))
 });
 
-router.post('/connection', async (req, res) => {
+router.post('/CreateConnection', async (req, res) => {
     //The body param will contain the connection between the two coworkers, that is where it will be
     // Checks if already existing connection exists
+
+    console.log(req.body)
 
     let connection_first_name_1 = req.body.first_name_1;
     let connection_last_name_1 = req.body.last_name_1;
@@ -77,3 +80,6 @@ router.post('/connection', async (req, res) => {
 })
 
 //Need to add a delete
+
+
+module.exports = router;

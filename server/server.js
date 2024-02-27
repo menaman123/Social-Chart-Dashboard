@@ -15,6 +15,10 @@ async function connect() {
 }
 
 connect();
+
+const connectionRoutes = require("./routes/connectionRoutes");
+
+app.use("/", connectionRoutes);
 app.listen(8000, () => {
     console.log("Server started on port 8000");
 });
